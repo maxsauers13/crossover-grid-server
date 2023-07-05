@@ -1,3 +1,5 @@
+import datetime
+
 class Server:
     def __init__(self, mongo_db_guess):
         self.encoding_standard = "utf-8"
@@ -9,7 +11,8 @@ class Server:
             "player": player,
             "team1": team1,
             "team2": team2,
-            "correct": correct
+            "correct": correct,
+            "day": datetime.now().strftime("%Y-%m-%d")
         }
 
         result = self.mongo_db_guess.insert_one(document)
@@ -46,4 +49,5 @@ class Server:
 
         # calculate rarity
         rarity = len(playerGuesses) // len(teamGuesses)
+        print(rarity)
         return rarity
