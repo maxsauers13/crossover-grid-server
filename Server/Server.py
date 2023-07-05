@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 class Server:
     def __init__(self, mongo_db_guess):
