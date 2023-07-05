@@ -36,7 +36,6 @@ class Server:
             {'team2': team2}
         ]}
         playerGuesses = list(self.mongo_db_guess.find(queryPlayer))
-        print(playerGuesses)
 
         # find total number of guesses for 2 team combo
         queryTeams = {'$and': [
@@ -45,9 +44,8 @@ class Server:
             {"correct": True}
         ]}
         teamGuesses = list(self.mongo_db_guess.find(queryTeams))
-        print(teamGuesses)
 
         # calculate rarity
         rarity = int((len(playerGuesses) / len(teamGuesses)) * 100)
-        print(rarity)
+        print(player, team1, team2, len(playerGuesses), len(teamGuesses) rarity)
         return rarity
