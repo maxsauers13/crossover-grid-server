@@ -4,11 +4,12 @@ class Server:
         self.mongo_db_guess = mongo_db_guess
     
     # save a guess in mongo db
-    def saveGuess(self, player, team1, team2):
+    def saveGuess(self, player, team1, team2, correct):
         document = {
             "player": player,
             "team1": team1,
-            "team2": team2
+            "team2": team2,
+            "correct": correct
         }
 
         result = self.mongo_db_guess.insert_one(document)
@@ -19,5 +20,12 @@ class Server:
 
     # get the rarity of a guess
     # def guessRarity(self, player, team1, team2):
-    #     query = {}
-    #     guesses = self.mongo_db_guess.find()
+    #     # find number of times player has guessed
+    #     query = {'$and': [
+    #         {'player': player},
+    #         {'team1': team1},
+    #         {'team2': team2}
+    #     ]}
+    #     playerGuesses = self.mongo_db_guess.find(query)
+
+        # find total number of guesses for 2 team combos

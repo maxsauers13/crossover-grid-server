@@ -21,6 +21,7 @@ def saveGuess():
     player = body.get("player")
     team1 = body.get("team1")
     team2 = body.get("team2")
+    correct = body.get("correct")
 
-    success, response = server.saveGuess(player, team1, team2)
+    success, response = server.saveGuess(player, team1, team2, correct)
     return response if success else Response(status=400, response=response)
