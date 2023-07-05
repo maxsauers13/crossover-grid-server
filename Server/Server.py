@@ -48,6 +48,6 @@ class Server:
         teamGuesses = list(self.mongo_db_guess.find(queryTeams))
 
         # calculate rarity
-        rarity = int((len(playerGuesses) / len(teamGuesses)) * 100)
+        rarity = round((len(playerGuesses) / len(teamGuesses)) * 100, 1)
         print(player, team1, team2, len(playerGuesses), len(teamGuesses), rarity)
         return rarity
