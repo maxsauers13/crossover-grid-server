@@ -47,5 +47,5 @@ class Server:
 
         # calculate rarity
         rarity = int((len(playerGuesses) / len(teamGuesses)) * 100)
-        print(player, team1, team2, len(playerGuesses), len(teamGuesses) rarity)
+        print(player, team1, team2, len(playerGuesses), len(teamGuesses), rarity)
         return rarity
