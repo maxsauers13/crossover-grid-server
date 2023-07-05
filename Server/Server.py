@@ -39,7 +39,7 @@ class Server:
         queryTeams = {'$and': [
             {'team1': team1},
             {'team2': team2},
-            {"correct"}: True
+            {"correct"}: "true"
         ]}
         teamGuesses = self.mongo_db_guess.find(queryTeams)
         print(teamGuesses)
