@@ -1,7 +1,7 @@
 from flask import Flask, request, Response
 from flask_cors import CORS, cross_origin
 from pymongo import MongoClient
-from server.Server import Server
+from Server.Server import Server
 import json
 
 app = Flask(__name__)
