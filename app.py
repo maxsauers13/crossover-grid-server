@@ -7,6 +7,9 @@ import json
 app = Flask(__name__)
 CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
+# Configure SSL/TLS certificate and private key paths
+ssl_cert = '/etc/letsencrypt/live/crossovergridserver.com/fullchain.pem'
+ssl_key = '/etc/letsencrypt/live/crossovergridserver.com/privkey.pem'
 
 mongo_client = MongoClient("mongodb+srv://jared:kyhzur-Xokson-4netru@crossovergrid.1o3jktx.mongodb.net/?retryWrites=true&w=majority")
 mongo_db_guess = mongo_client["CrossoverGrid"]["Guess"]
@@ -28,4 +31,4 @@ def saveGuess():
 
 if __name__ == "__main__":
     # app.run(host="34.136.209.112", port=41454, debug=True)
-    app.run(ssl_context='adhoc')
+    app.run(ssl_context=(ssl_cert, ssl_key))
