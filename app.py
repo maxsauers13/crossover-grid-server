@@ -2,12 +2,13 @@ from flask import Flask, request, Response
 from flask_cors import CORS, cross_origin
 from pymongo import MongoClient
 from server.Server import Server
+import json
 
 app = Flask(__name__)
 CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 
-mongo_client = MongoClient("mongodb+srv://jared:kyhzur-Xokson-4netru@crossovergrid.1o3jktx.mongodb.net/")
+mongo_client = MongoClient("mongodb+srv://jared:kyhzur-Xokson-4netru@crossovergrid.1o3jktx.mongodb.net/?retryWrites=true&w=majority")
 mongo_db_guess = mongo_client["CrossoverGrid"]["Guess"]
 server = Server(mongo_db_guess)
 

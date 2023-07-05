@@ -1,5 +1,6 @@
 class Server:
     def __init__(self, mongo_db_guess):
+        self.encoding_standard = "utf-8"
         self.mongo_db_guess = mongo_db_guess
     
     # save a guess in mongo db
@@ -15,3 +16,8 @@ class Server:
             return True, f"Guess saved: {player} - {team1} - {team2}"
         else:
             return False, "Database not acknowledged"
+
+    # get the rarity of a guess
+    # def guessRarity(self, player, team1, team2):
+    #     query = {}
+    #     guesses = self.mongo_db_guess.find()
