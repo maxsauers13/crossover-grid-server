@@ -17,7 +17,7 @@ class Server:
         # get percentage if correct guess
         rarity = None
         if correct:
-            rarity = guessRarity(player, team1, team2)
+            rarity = self.guessRarity(player, team1, team2)
 
         if result.acknowledged:
             return True, {"rarity": rarity}
