@@ -24,7 +24,7 @@ class Server:
         else:
             return False, "Database not acknowledged"
 
-    get the rarity of a guess
+    # get the rarity of a guess
     def guessRarity(self, player, team1, team2):
         # find number of times player has guessed
         queryPlayer = {'$and': [
