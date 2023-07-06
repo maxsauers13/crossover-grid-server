@@ -58,4 +58,4 @@ class Server:
     # fetch the n most recent guesses
     def fetchGuesses(self, numGuesses):
         guesses = self.mongo_db_guess.find().sort('_id', -1).limit(int(numGuesses))
-        return guesses
+        return True, guesses
