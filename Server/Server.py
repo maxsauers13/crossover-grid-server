@@ -22,7 +22,7 @@ class Server:
         if correct:
             rarity = self.guessRarity(player, team1, team2)
         else:
-            print(player, team1, team2, "incorrect")
+            # print(player, team1, team2, "incorrect")
 
         if result.acknowledged:
             return True, {"rarity": rarity}
@@ -57,6 +57,6 @@ class Server:
 
     # fetch the n most recent guesses
     def fetchGuesses(self, numGuesses):
-        guesses = list(self.mongo_db_guess.find().sort('_id', -1).limit(int(numGuesses)))
+        guesses = list(self.mongo_db_guess.find({}, {"_id:": 0}).sort('_id', -1).limit(int(numGuesses)))
         print(guesses)
         return True, guesses
