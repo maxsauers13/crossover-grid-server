@@ -58,6 +58,6 @@ class Server:
     # fetch the n most recent guesses
     def fetchGuesses(self, numGuesses):
         guesses = list(self.mongo_db_guess.find({}, {"_id:": 0}).sort('_id', -1).limit(int(numGuesses)))
-        guesses = [guess["player"] + " " + guess["team1"] + " " + guess["team2"] + " " + guess["correct"] for guess in guesses]
+        guesses = [guess["player"] + " " + guess["team1"] + " " + guess["team2"] for guess in guesses]
         print(guesses)
         return True, guesses
