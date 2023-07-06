@@ -54,3 +54,8 @@ class Server:
         rarity = round((playerGuesses / teamGuesses) * 100, 1)
         print(player, team1, team2, playerGuesses, teamGuesses, rarity)
         return rarity
+
+    # fetch the n most recent guesses
+    def fetchGuesses(self, numGuesses):
+        guesses = documents = collection.find().sort('_id', -1).limit(numGuesses)
+        return guesses

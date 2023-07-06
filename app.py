@@ -29,6 +29,12 @@ def saveGuess():
     success, response = server.saveGuess(player, team1, team2, correct)
     return response if success else Response(status=400, response=response)
 
+@app.route("/guesses/fetch/<numGuesses>", methods=["GET"])
+@cross_origin()
+def fetchGuesses(numGuesses):
+    success, response = server.fetchGuesses()
+    return response if success else Response(status=400, response=response)
+
 if __name__ == "__main__":
     # app.run(host="34.136.209.112", port=41454, debug=True)
     app.run(ssl_context=(ssl_cert, ssl_key))
