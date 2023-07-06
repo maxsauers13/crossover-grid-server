@@ -57,5 +57,5 @@ class Server:
 
     # fetch the n most recent guesses
     def fetchGuesses(self, numGuesses):
-        guesses = documents = collection.find().sort('_id', -1).limit(numGuesses)
+        guesses = collection.find().sort('_id', -1).limit(numGuesses)
         return guesses

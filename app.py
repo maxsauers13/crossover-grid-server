@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, jsonify
 from flask_cors import CORS, cross_origin
 from pymongo import MongoClient
 from Server.Server import Server
@@ -33,7 +33,7 @@ def saveGuess():
 @cross_origin()
 def fetchGuesses(numGuesses):
     success, response = server.fetchGuesses()
-    return response if success else Response(status=400, response=response)
+    return jsonify(response) if success else Response(status=400, response=response)
 
 if __name__ == "__main__":
     # app.run(host="34.136.209.112", port=41454, debug=True)
