@@ -52,10 +52,11 @@ class Server:
         # calculate rarity
         # rarity = round((len(playerGuesses) / len(teamGuesses)) * 100, 1)
         rarity = round((playerGuesses / teamGuesses) * 100, 1)
-        print(player, team1, team2, playerGuesses, teamGuesses, rarity)
+        # print(player, team1, team2, playerGuesses, teamGuesses, rarity)
         return rarity
 
     # fetch the n most recent guesses
     def fetchGuesses(self, numGuesses):
         guesses = list(self.mongo_db_guess.find().sort('_id', -1).limit(int(numGuesses)))
+        print(guesses)
         return True, guesses
