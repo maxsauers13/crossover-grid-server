@@ -32,7 +32,7 @@ def saveGuess():
 @app.route("/guesses/fetch/<numGuesses>", methods=["GET"])
 @cross_origin()
 def fetchGuesses(numGuesses):
-    success, response = server.fetchGuesses()
+    success, response = server.fetchGuesses(numGuesses)
     return jsonify(response) if success else Response(status=400, response=response)
 
 if __name__ == "__main__":
