@@ -70,7 +70,7 @@ class Server:
         print(f"Grid score {score} is rank {rank}")
 
         if result.acknowledged:
-            return True, {"rank": rank, "total", total}
+            return True, {"rank": rank, "total": total}
         else:
             return False, "Database not acknowledged"
 
