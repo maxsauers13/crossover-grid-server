@@ -23,7 +23,7 @@ class Server:
         if correct:
             rarity = self.guessRarity(player, team1, team2)
         else:
-            print(player, team1, team2, "incorrect")
+            # print(player, team1, team2, "incorrect")
 
         if result.acknowledged:
             return True, {"rarity": rarity}
