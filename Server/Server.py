@@ -1,9 +1,10 @@
 from datetime import datetime
 
 class Server:
-    def __init__(self, mongo_db_guess):
+    def __init__(self, mongo_db_guess, mongo_db_grid):
         self.encoding_standard = "utf-8"
         self.mongo_db_guess = mongo_db_guess
+        self.mongo_db_grid = mongo_db_grid
     
     # save a guess in mongo db
     def saveGuess(self, player, team1, team2, correct):
@@ -52,8 +53,35 @@ class Server:
         # calculate rarity
         # rarity = round((len(playerGuesses) / len(teamGuesses)) * 100, 1)
         rarity = round((playerGuesses / teamGuesses) * 100, 1)
-        print(player, team1, team2, playerGuesses, teamGuesses, rarity)
+        # print(player, team1, team2, playerGuesses, teamGuesses, rarity)
         return rarity
+
+    # save a grid and gets its rank
+    def saveGrid(self, teams, players, score):
+        document = {
+            "teams": teams,
+            "score": score
+        }
+
+        result = self.mongo_db_grid.insert_one(document)
+
+        # get rank
+        rank = self.gridRank(document)
+        print(f"Grid score {score} is rank {rank}")
+
+        if result.acknowledged:
+            return True, {"rank": rank}
+        else:
+            return False, "Database not acknowledged"
+
+    # get the rank of the grid
+    def gridRank(self, document):
+        higherScoreCount = self.mongo_db_grid.count_documents({
+            "teams": document["teams"],
+            "score": {"$gt": document["score"]}
+        })
+
+        return higherScoreCount + 1
 
     # fetch the n most recent guesses
     def fetchGuesses(self, numGuesses):
