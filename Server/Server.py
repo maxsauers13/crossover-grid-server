@@ -66,11 +66,11 @@ class Server:
         result = self.mongo_db_grid.insert_one(document)
 
         # get rank
-        rank = self.gridRank(document)
+        rank, total = self.gridRank(document)
         print(f"Grid score {score} is rank {rank}")
 
         if result.acknowledged:
-            return True, {"rank": rank}
+            return True, {"rank": rank, "total", total}
         else:
             return False, "Database not acknowledged"
 
@@ -81,7 +81,11 @@ class Server:
             "score": {"$gt": document["score"]}
         })
 
-        return higherScoreCount + 1
+        totalScoreCount = self.mongo_db_grid.count_documents({
+            "teams": document["teams"]
+        })
+
+        return higherScoreCount + 1, totalScoreCount
 
     # fetch the n most recent guesses
     def fetchGuesses(self, numGuesses):
