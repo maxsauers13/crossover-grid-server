@@ -78,7 +78,7 @@ class Server:
     def gridRank(self, document):
         higherScoreCount = self.mongo_db_grid.count_documents({
             "teams": document["teams"],
-            "score": {"$gt": document["score"]}
+            "score": {"$lt": document["score"]}
         })
 
         totalScoreCount = self.mongo_db_grid.count_documents({
