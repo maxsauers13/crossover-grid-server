@@ -43,6 +43,8 @@ class Server:
             # determine if percentage needs to be updated
             if playerGuessed != None and ("rarity" not in playerGuessed or "datetime" not in playerGuessed or datetime.fromtimestamp(time.time()) - playerGuessed["datetime"] >= timedelta(minutes=10)):
                 rarity = self.updateRarity(player, team1, team2)
+            else:
+                rarity = playerGuessed["rarity"]
         # else:
             # print(player, team1, team2, "incorrect")
 
