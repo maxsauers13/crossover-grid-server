@@ -31,6 +31,10 @@ class Server:
             ]}
             playerGuessed = self.mongo_db_guessPercentage.find_one(queryPlayer)
 
+            if not playerGuessed:
+                self.mongo_db_guessPercentage.insert_one(queryPlayer)
+                playerGuessed = self.mongo_db_guessPercentage.find_one(queryPlayer)
+
             # determine if percentage needs to be updated
             if "rarity" not in playerGuessed or "datetime" not in playerGuessed or datetime.fromtimestamp(time.time(), tz=timezone.utc) - playerGuessed["datetime"] >= timedelta(minutes=10):
                 rarity = playerGuessed["rarity"]
