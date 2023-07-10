@@ -1,9 +1,11 @@
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
+import time
 
 class Server:
-    def __init__(self, mongo_db_guess, mongo_db_grid):
+    def __init__(self, mongo_db_guess, mongo_db_grid, mongo_db_guessPercentage):
         self.encoding_standard = "utf-8"
         self.mongo_db_guess = mongo_db_guess
+        self.mongo_db_guessPercentage = monog_db_guessPercentage
         self.mongo_db_grid = mongo_db_grid
     
     # save a guess in mongo db
@@ -21,7 +23,18 @@ class Server:
         # get percentage if correct guess
         rarity = None
         if correct:
-            rarity = self.guessRarity(player, team1, team2)
+            # rarity = self.guessRarity(player, team1, team2)
+            queryPlayer = {'$and': [
+                {'player': player},
+                {'team1': team1},
+                {'team2': team2}
+            ]}
+            playerGuessed = self.mongo_db_guessPercentage.find_one(query)
+
+            # determine if percentage needs to be updated
+            if "rarity" not in playerGuessed or "datetime" not in playerGuessed or datetime.fromtimestamp(time.time(), tz=timezone.utc) - playerGuessed["datetime"] >= timedelta(minutes=10):
+                rarity = playerGuessed["rarity"]
+                self.updateRarity(player, team1, team2)
         # else:
             # print(player, team1, team2, "incorrect")
 
@@ -55,6 +68,19 @@ class Server:
         rarity = round((playerGuesses / teamGuesses) * 100, 1)
         # print(player, team1, team2, playerGuesses, teamGuesses, rarity)
         return rarity
+
+    def updateRarity(self, player, team1, team2):
+        rarity = self.guessRarity(player, team1, team2)
+        queryPlayer = {'$and': [
+            {'player': player},
+            {'team1': team1},
+            {'team2': team2}
+        ]}
+
+        updateValues = {"$set": {"rarity": rarity, "datetime": datetime.fromtimestamp(time.time(), tz=timezone.utc)}}
+
+        self.mongo_db_guessPercentage.update_one(queryPlayer, updateValues)
+        print(player, team1, team2, rarity)
 
     # save a grid and gets its rank
     def saveGrid(self, teams, players, score):

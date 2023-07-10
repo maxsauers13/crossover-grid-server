@@ -13,8 +13,9 @@ ssl_key = '/etc/letsencrypt/live/crossovergridserver.com/privkey.pem'
 
 mongo_client = MongoClient("mongodb+srv://jared:kyhzur-Xokson-4netru@crossovergrid.1o3jktx.mongodb.net/?retryWrites=true&w=majority")
 mongo_db_guess = mongo_client["CrossoverGrid"]["Guess"]
+mongo_db_guessPercentage = mongo_client["CrossoverGrid"]["GuessPercentage"]
 mongo_db_grid = mongo_client["CrossoverGrid"]["Grid"]
-server = Server(mongo_db_guess, mongo_db_grid)
+server = Server(mongo_db_guess, mongo_db_grid, mongo_db_guessPercentage)
 
 ####################################################END POINTS#######################################################
 
