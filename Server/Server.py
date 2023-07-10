@@ -42,8 +42,7 @@ class Server:
 
             # determine if percentage needs to be updated
             if playerGuessed != None and ("rarity" not in playerGuessed or "datetime" not in playerGuessed or datetime.fromtimestamp(time.time(), tz=timezone.utc) - playerGuessed["datetime"] >= timedelta(minutes=10)):
-                rarity = playerGuessed["rarity"]
-                self.updateRarity(player, team1, team2)
+                rarity = self.updateRarity(player, team1, team2)
         # else:
             # print(player, team1, team2, "incorrect")
 
@@ -90,6 +89,7 @@ class Server:
 
         self.mongo_db_guessPercentage.update_one(queryPlayer, updateValues)
         print(player, team1, team2, rarity)
+        return rarity
 
     # save a grid and gets its rank
     def saveGrid(self, teams, players, score):
