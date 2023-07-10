@@ -5,7 +5,7 @@ class Server:
     def __init__(self, mongo_db_guess, mongo_db_grid, mongo_db_guessPercentage):
         self.encoding_standard = "utf-8"
         self.mongo_db_guess = mongo_db_guess
-        self.mongo_db_guessPercentage = monog_db_guessPercentage
+        self.mongo_db_guessPercentage = mongo_db_guessPercentage
         self.mongo_db_grid = mongo_db_grid
     
     # save a guess in mongo db
