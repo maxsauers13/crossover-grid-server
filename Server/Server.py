@@ -32,6 +32,11 @@ class Server:
             playerGuessed = self.mongo_db_guessPercentage.find_one(queryPlayer)
 
             if not playerGuessed:
+                document = {
+                    "player": player,
+                    "team1": team1,
+                    "team2": team2
+                }
                 self.mongo_db_guessPercentage.insert_one(queryPlayer)
                 playerGuessed = self.mongo_db_guessPercentage.find_one(queryPlayer)
 
