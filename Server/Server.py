@@ -29,7 +29,7 @@ class Server:
                 {'team1': team1},
                 {'team2': team2}
             ]}
-            playerGuessed = self.mongo_db_guessPercentage.find_one(query)
+            playerGuessed = self.mongo_db_guessPercentage.find_one(queryPlayer)
 
             # determine if percentage needs to be updated
             if "rarity" not in playerGuessed or "datetime" not in playerGuessed or datetime.fromtimestamp(time.time(), tz=timezone.utc) - playerGuessed["datetime"] >= timedelta(minutes=10):
