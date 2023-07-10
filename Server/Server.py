@@ -37,7 +37,7 @@ class Server:
                     "team1": team1,
                     "team2": team2
                 }
-                self.mongo_db_guessPercentage.insert_one(queryPlayer)
+                self.mongo_db_guessPercentage.insert_one(document)
                 playerGuessed = self.mongo_db_guessPercentage.find_one(queryPlayer)
 
             # determine if percentage needs to be updated
