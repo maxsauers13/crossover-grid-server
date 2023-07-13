@@ -128,15 +128,15 @@ class Server:
     def fetchGridGuesses(self, teams):
         teams = teams.split("-")
         query = {"$or": [
-            {"$and": [{team1: teams[0]}, {team2: teams[3]}]},
-            {"$and": [{team1: teams[0]}, {team2: teams[4]}]},
-            {"$and": [{team1: teams[0]}, {team2: teams[5]}]},
-            {"$and": [{team1: teams[1]}, {team2: teams[3]}]},
-            {"$and": [{team1: teams[1]}, {team2: teams[4]}]},
-            {"$and": [{team1: teams[1]}, {team2: teams[5]}]},
-            {"$and": [{team1: teams[2]}, {team2: teams[3]}]},
-            {"$and": [{team1: teams[2]}, {team2: teams[4]}]},
-            {"$and": [{team1: teams[2]}, {team2: teams[5]}]}
+            {"$and": [{"team1": teams[0]}, {"team2": teams[3]}]},
+            {"$and": [{"team1": teams[0]}, {"team2": teams[4]}]},
+            {"$and": [{"team1": teams[0]}, {"team2": teams[5]}]},
+            {"$and": [{"team1": teams[1]}, {"team2": teams[3]}]},
+            {"$and": [{"team1": teams[1]}, {"team2": teams[4]}]},
+            {"$and": [{"team1": teams[1]}, {"team2": teams[5]}]},
+            {"$and": [{"team1": teams[2]}, {"team2": teams[3]}]},
+            {"$and": [{"team1": teams[2]}, {"team2": teams[4]}]},
+            {"$and": [{"team1": teams[2]}, {"team2": teams[5]}]}
         ]}
         
         return True, self.mongo_db_guess.count_documents(query) 
