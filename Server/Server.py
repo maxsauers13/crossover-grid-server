@@ -124,9 +124,19 @@ class Server:
 
         return higherScoreCount + 1, totalScoreCount
 
-    # fetch the n most recent guesses
-    def fetchGuesses(self, numGuesses):
-        guesses = list(self.mongo_db_guess.find({}, {"_id:": 0}).sort('_id', -1).limit(int(numGuesses)))
-        guesses = [guess["player"] + " " + guess["team1"] + " " + guess["team2"] for guess in guesses]
-        # print(guesses)
-        return True, guesses
+    #fetch guesses for a grid
+    def fetchGridGuesses(self, teams):
+        teams = teams.split("-")
+        query = {"$or": [
+            {"$and": [{team1: teams[0]}, {team2: teams[3]}]},
+            {"$and": [{team1: teams[0]}, {team2: teams[4]}]},
+            {"$and": [{team1: teams[0]}, {team2: teams[5]}]},
+            {"$and": [{team1: teams[1]}, {team2: teams[3]}]},
+            {"$and": [{team1: teams[1]}, {team2: teams[4]}]},
+            {"$and": [{team1: teams[1]}, {team2: teams[5]}]},
+            {"$and": [{team1: teams[2]}, {team2: teams[3]}]},
+            {"$and": [{team1: teams[2]}, {team2: teams[4]}]},
+            {"$and": [{team1: teams[2]}, {team2: teams[5]}]}
+        ]}
+        
+        return True, self.mongo_db_guess.count_documents(query) 
