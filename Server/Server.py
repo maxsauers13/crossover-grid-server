@@ -90,7 +90,7 @@ class Server:
         updateValues = {"$set": {"rarity": rarity, "datetime": datetime.fromtimestamp(time.time())}}
 
         self.mongo_db_guessPercentage.update_one(queryPlayer, updateValues)
-        # print(player, team1, team2, rarity)
+        print(player, team1, team2, rarity)
         return rarity
 
     # save a grid and gets its rank
@@ -104,7 +104,7 @@ class Server:
 
         # get rank
         rank, total = self.gridRank(document)
-        # print(f"Grid score {score} is rank {rank}")
+        print(f"Grid score {score} is rank {rank}")
 
         if result.acknowledged:
             return True, {"rank": rank, "total": total}
