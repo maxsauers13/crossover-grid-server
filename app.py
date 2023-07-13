@@ -45,7 +45,7 @@ def saveGrid():
 @app.route("/guesses/fetch/<teams>", methods=["GET"])
 @cross_origin()
 def fetchGridGuesses(teams):
-    success, response = server.fetchGridGuesses(numGuesses)
+    success, response = server.fetchGridGuesses(teams)
     return jsonify(response) if success else Response(status=400, response=response)
 
 if __name__ == "__main__":
